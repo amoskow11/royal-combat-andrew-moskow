@@ -1,0 +1,20 @@
+# Dependency folder (installed by npm, not something we write by hand)
+node_modules/
+
+# Local Cloudflare Workers dev server cache/state
+.wrangler/
+
+# Secrets you keep only on your own machine, never in git
+.dev.vars
+.env
+.env.*
+
+# macOS Finder metadata files
+.DS_Store
+
+# Editor folders
+.vscode/
+.idea/
+
+# Build output, if a build step is ever added
+dist/
