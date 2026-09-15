@@ -17,13 +17,33 @@ the theme changes how the game is actually played or decided.
 It supports three independent ways to play (see Section 3), all sharing one rules engine so the
 game behaves identically no matter which mode you're in.
 
-> **Note on the Figma designs:** this project references Figma designs, but no Figma file link was
-> available while writing this spec. Section 2 (below) describes the intended look based on the
-> theme description you gave. Before Task 1.4 in the roadmap (building the board UI), share the
-> Figma file link so the actual colors, layout, and piece art can be pulled in and this section
-> updated to match exactly.
+> **Figma designs:** [Royal Combat — Figma](https://www.figma.com/design/h7v79c5tiUfKjuA9KBuEZq)
+> holds the three core screens (Landing, Room Join, Chessboard), built by Claude Code directly in
+> Figma via the Figma connector from the style description below. Section 2 documents exactly what
+> those screens establish, so Phase 2 of the roadmap (building the board UI) has a concrete target
+> to match.
 
 ## 2. The Look
+
+### 2.0 Style spec (as built in Figma)
+
+- **Palette** — a deep near-black brown background (`#1B140F`), gold accents (`#C9A227`) for
+  headings, borders, and the board's outer frame, cream/parchment (`#EFE3C8`) for body text and
+  the White army, and burgundy (`#7A1F2B`) for the Black army and secondary buttons. Board squares
+  alternate warm stone (`#8B7355`) and dark stone (`#3B2F2A`).
+- **Type** — **Cinzel** (a Roman/royal-inspired display serif) for all-caps titles and buttons,
+  paired with **Cormorant Garamond** for body copy and captions — both are free Google Fonts
+  available directly in Figma.
+- **Piece art** — the Figma Plugin API that Claude Code uses to draw in Figma can only build with
+  shapes, text, and existing images already in a file; it cannot generate original illustration.
+  So for now, each piece is a circular medallion (cream for White, burgundy for Black) labeled with
+  its unit's initials (K, Q, FK, AR, CV, FS — see the roster below) rather than a drawn character.
+  This is enough to build and test the real game against. Turning these into actual illustrated
+  units (or commissioning/finding piece art and importing it) is a good next step once the game
+  itself works, but it's a separate, later effort — see Section 6.
+- **Screens built:** a landing screen with the three mode buttons, a room-code join screen for
+  Online mode, and a chessboard screen showing the starting position, a turn-status bar, and a
+  "New Game" button. All three are in the Figma file linked above.
 
 ### 2.1 Piece roster
 

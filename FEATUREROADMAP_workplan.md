@@ -110,8 +110,8 @@ proving the whole Cloudflare Workers pipeline works before anything else is laye
   - Dependencies: 2.1
   - Files: `public/index.html`, `public/style.css`, `public/app.js`
   - What it is: draw an 8x8 board and place every piece from `rules.js`'s starting position onto
-    it, using the piece roster from ProductSpec Section 2.1 (placeholder art is fine until the
-    Figma file is linked — see the note at the top of ProductSpec.md).
+    it, matching the [Figma chessboard screen](https://www.figma.com/design/h7v79c5tiUfKjuA9KBuEZq)
+    — the palette, fonts, and piece-badge style from ProductSpec Section 2.
   - DoD: Loading the page in a browser shows a correctly arranged starting chess position, matching
     the standard layout square-for-square.
 
