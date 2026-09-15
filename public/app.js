@@ -116,12 +116,14 @@ function commitMove(move) {
   }
 
   if (capturedInstance) {
-    capturedInstance.flashing = true;
+    capturedInstance.defeated = true;
+    movedInstance.attacking = true;
     render();
     window.setTimeout(() => {
       pieceInstances = pieceInstances.filter((i) => i !== capturedInstance);
       pieceElements.get(capturedInstance.id)?.remove();
       pieceElements.delete(capturedInstance.id);
+      movedInstance.attacking = false;
       finishMove(move, movedInstance);
     }, CAPTURE_ANIMATION_MS);
   } else {
@@ -273,7 +275,10 @@ function renderPiece(instance) {
   const { left, top } = squareCoords(instance.square);
   el.style.left = `${left + 8}px`;
   el.style.top = `${top + 8}px`;
-  el.className = 'piece ' + (color === 'w' ? 'white' : 'black') + (instance.flashing ? ' battle-flash' : '');
+  let classes = 'piece ' + (color === 'w' ? 'white' : 'black');
+  if (instance.defeated) classes += ' defeated';
+  if (instance.attacking) classes += ' attacking';
+  el.className = classes;
   el.textContent = PIECE_LABEL[type];
   el.title = `${color === 'w' ? 'White' : 'Black'} ${PIECE_NAME[type]}`;
   return el;
