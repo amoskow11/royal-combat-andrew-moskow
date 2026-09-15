@@ -152,8 +152,6 @@ h1, h2, .cinzel {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Cinzel', serif;
-  font-size: 14px;
   transition: left 0.25s ease, top 0.25s ease;
   transform-style: preserve-3d;
   transform-origin: 50% 85%;
@@ -174,6 +172,12 @@ h1, h2, .cinzel {
 .piece.black {
   background: radial-gradient(circle at 35% 28%, #5b606d 0%, #34363f 50%, #16171b 100%);
   color: var(--accent);
+}
+
+.piece svg {
+  width: 28px;
+  height: 28px;
+  pointer-events: none;
 }
 
 .piece.arrive {
