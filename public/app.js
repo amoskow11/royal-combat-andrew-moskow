@@ -8,10 +8,25 @@ import {
   pieceType,
 } from './rules.js';
 
-const PIECE_LABEL = { K: 'K', Q: 'Q', R: 'FK', B: 'AR', N: 'CV', P: 'FS' };
 const PIECE_NAME = { K: 'King', Q: 'Queen', R: 'Foot Knight', B: 'Archer', N: 'Cavalry', P: 'Foot Soldier' };
 const SQUARE_PX = 64;
 const CAPTURE_ANIMATION_MS = 450;
+
+// Same icon shapes as the Figma chessboard screen — a crown, a castle
+// tower, a bow, a horseshoe, and a simple soldier — instead of letter
+// abbreviations. `currentColor` follows the .piece element's CSS `color`.
+const PIECE_ICON = {
+  K: '<path d="M5 19h14"/><path d="M6 19L7 11L9.5 15L12 8L14.5 15L17 11L18 19"/><path d="M12 7V4M10.5 5.5h3"/>',
+  Q: '<path d="M5 19h14"/><path d="M6 19L7 11L9.5 15L12 8L14.5 15L17 11L18 19"/><circle cx="7" cy="9.3" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="6.3" r="1" fill="currentColor" stroke="none"/><circle cx="17" cy="9.3" r="1" fill="currentColor" stroke="none"/>',
+  R: '<path d="M6 20h12"/><path d="M7 20V10"/><path d="M17 20V10"/><path d="M7 10V6h2v3h2V6h2v3h2V6h2v4"/>',
+  B: '<path d="M7 4C13 6 13 18 7 20"/><path d="M7 4V20"/><path d="M5 12h12"/><path d="M14 9l3 3-3 3"/>',
+  N: '<path d="M8 20v-7a4 4 0 0 1 8 0v7"/><circle cx="7" cy="20" r="1" fill="currentColor" stroke="none"/><circle cx="17" cy="20" r="1" fill="currentColor" stroke="none"/>',
+  P: '<circle cx="12" cy="7" r="2.6"/><path d="M9 20c0-5 1-9 3-9s3 4 3 9"/><path d="M7 20h10"/>',
+};
+
+function pieceIconSvg(type) {
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${PIECE_ICON[type]}</svg>`;
+}
 
 const app = document.getElementById('app');
 
@@ -203,7 +218,7 @@ function renderGame() {
 
   const legend = document.createElement('p');
   legend.className = 'legend';
-  legend.textContent = 'K King · Q Queen · FK Foot Knight · AR Archer · CV Cavalry · FS Foot Soldier';
+  legend.textContent = 'King · Queen · Foot Knight · Archer · Cavalry · Foot Soldier';
   app.appendChild(legend);
 
   const controls = document.createElement('div');
@@ -279,7 +294,7 @@ function renderPiece(instance) {
   if (instance.defeated) classes += ' defeated';
   if (instance.attacking) classes += ' attacking';
   el.className = classes;
-  el.textContent = PIECE_LABEL[type];
+  el.innerHTML = pieceIconSvg(type);
   el.title = `${color === 'w' ? 'White' : 'Black'} ${PIECE_NAME[type]}`;
   return el;
 }
