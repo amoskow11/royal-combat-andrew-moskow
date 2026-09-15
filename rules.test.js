@@ -2,7 +2,7 @@
 // See ProductSpec.md Section 4.1. These three counts are universally agreed
 // on for the standard chess starting position; if any don't match, a piece's
 // movement rule (or check/castling/en passant handling) has a bug.
-import { initialState, perft, getGameStatus, generateLegalMoves, makeMove, squareToIndex, WHITE, BLACK } from './rules.js';
+import { initialState, perft, getGameStatus, generateLegalMoves, makeMove, squareToIndex, WHITE, BLACK } from './public/rules.js';
 
 const expected = { 1: 20, 2: 400, 3: 8902 };
 let allPassed = true;
