@@ -27,20 +27,25 @@ game behaves identically no matter which mode you're in.
 
 ### 2.0 Style spec (as built in Figma)
 
-- **Palette** — a deep near-black brown background (`#1B140F`), gold accents (`#C9A227`) for
-  headings, borders, and the board's outer frame, cream/parchment (`#EFE3C8`) for body text and
-  the White army, and burgundy (`#7A1F2B`) for the Black army and secondary buttons. Board squares
-  alternate warm stone (`#8B7355`) and dark stone (`#3B2F2A`).
-- **Type** — **Cinzel** (a Roman/royal-inspired display serif) for all-caps titles and buttons,
-  paired with **Cormorant Garamond** for body copy and captions — both are free Google Fonts
-  available directly in Figma.
+Revised after you shared a reference photo of the enchanted chess set from the *Harry Potter*
+films — cold blue-and-white marble board, pewter/iron stone pieces, torchlit stone hall — in place
+of the original warm gold-and-parchment "royal" look.
+
+- **Palette** — a cold near-black background (`#14161B`), an icy silver-blue accent (`#A9BEDC`)
+  for headings, borders, and highlights (replacing the original gold), pale stone (`#E6EAF2`) for
+  body text and the White army, and dark iron (`#34363F`) for the Black army. Board squares
+  alternate white marble (`#C7CDDA`) and blue marble (`#22304B`). A warm amber-red (`#B5502F`) is
+  reserved specifically for the check warning, so it still reads as "danger" even though the rest
+  of the palette is no longer warm-toned.
+- **Type** — unchanged: **Cinzel** for all-caps titles and buttons, **Cormorant Garamond** for
+  body copy and captions.
 - **Piece art** — the Figma Plugin API that Claude Code uses to draw in Figma can only build with
-  shapes, text, and existing images already in a file; it cannot generate original illustration.
-  So for now, each piece is a circular medallion (cream for White, burgundy for Black) labeled with
-  its unit's initials (K, Q, FK, AR, CV, FS — see the roster below) rather than a drawn character.
-  This is enough to build and test the real game against. Turning these into actual illustrated
-  units (or commissioning/finding piece art and importing it) is a good next step once the game
-  itself works, but it's a separate, later effort — see Section 6.
+  shapes, text, and existing images already in a file; it cannot generate original illustration or
+  import the reference photo itself. So for now, each piece is a circular medallion (pale stone for
+  White, iron for Black) labeled with its unit's initials (K, Q, FK, AR, CV, FS — see the roster
+  below) rather than a sculpted stone figure like the reference. This is enough to build and test
+  the real game against. Turning these into actual sculpted/illustrated units is a good next step
+  once the game itself works, but it's a separate, later effort — see Section 6.
 - **Screens built:** a landing screen with the three mode buttons, a room-code join screen for
   Online mode, and a chessboard screen showing the starting position, a turn-status bar, and a
   "New Game" button. All three are in the Figma file linked above.
@@ -59,23 +64,27 @@ at how the piece is allowed to move:
 | Knight | Cavalry (horseback unit) | A literal horse-mounted unit — this is the one piece where the theme name and the chess name already match. |
 | Pawn | Foot Soldier (spearman) | The basic infantry unit, front line of the army, exactly like the pawn's role. |
 
-Both sides use the same six units, recolored (e.g. a light stone/gold army vs. a dark
-iron/burgundy army) rather than being different armies, so the board stays easy to read at a
-glance — this matches how every version of chess keeps the two sides visually distinct but
-symmetrical.
+Both sides use the same six units, recolored (a pale stone army vs. a dark iron army) rather than
+being different armies, so the board stays easy to read at a glance — this matches how every
+version of chess keeps the two sides visually distinct but symmetrical.
 
 ### 2.2 Board and motion
 
 - Moving a piece **slides** it smoothly from its start square to its destination square, rather
   than jumping instantly — this is what makes the board read as "alive" instead of a static
   diagram.
-- **Capturing** a piece plays a brief (roughly half a second) battle effect at the destination
-  square — the attacking unit's icon flashes/lunges, the captured unit's icon reacts and is
-  removed — before the moving piece settles onto the square. This is a stylized effect (not a
-  full animated fight scene, which would be a much larger art and animation project); it is scoped
-  to what a solo developer with no prior art/animation pipeline can build and ship. If there's time
-  left after the roadmap's required tasks, richer per-piece attack animations are a natural next
-  step beyond this project's scope — see the "Out of scope" list in Section 6.
+- **Capturing** a piece plays a short fight (roughly half a second) at the destination square: the
+  attacking piece lunges and strikes (a scale/flash "impact"), and the captured piece is knocked
+  backward and **topples over using real 3D rotation** (a CSS 3D transform, not just a fade),
+  before it's removed and the attacker settles onto the square. Every piece token itself is also
+  shaded like a carved stone figure (a lit highlight and a shadowed edge, via a radial gradient and
+  layered shadows) rather than a flat-colored circle, so the board reads as three-dimensional
+  pieces rather than flat icons. This is still a stylized, CSS-only effect — there are no sculpted
+  3D character models (that would need a 3D art pipeline and a rendering library like Three.js,
+  a much bigger addition than this project's "plain HTML/CSS/JS, no build step" constraint allows)
+  — but it is a genuine fight-and-defeat animation, not a placeholder. If there's time left after
+  the roadmap's required tasks, true sculpted 3D models are a natural next step beyond this
+  project's scope — see the "Out of scope" list in Section 6.
 - **Check** highlights the king in danger (e.g. a red glow on its square).
 - **The last move made** stays highlighted (start and end square) so a second glance at the board
   shows what just happened — useful in hot-seat play when the board is shared.
